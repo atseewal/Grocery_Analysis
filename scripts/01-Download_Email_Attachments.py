@@ -1,24 +1,24 @@
-# Libraries
+#%% Libraries
 import imaplib
-import base64
 import os
 import email
 
 
-# Create email credentials
-email_user = input('shopping.analysis@gmail.com')
 
-with open('../secret/secret.txt', 'r') as file:
+#%% Create email credentials
+email_user = 'shopping.analysis@gmail.com'
+
+with open('C:/Users/Drew/Desktop/Grocery_Analysis/secret/secret.txt', 'r') as file:
     email_secret = file.read().replace('\n', '')
-email_pass = input(email_secret)
+email_pass = email_secret
 
 
-# Create the connection and login
+#%% Create the connection and login
 mail = imaplib.IMAP4_SSL("imap.gmail.com", 993)
 mail.login(email_user, email_pass)
 
 
-# Get raw data from Inbox
+#%% Get raw data from Inbox
 type, data = mail.select('Inbox')
 
 
@@ -44,7 +44,7 @@ for num in data[0].split():
         if bool(fileName):
 
             # Save the attachment
-            filePath = os.path.join('../temp/')
+            filePath = os.path.join('C:/Users/Drew/Desktop/Grocery_Analysis/temp/', fileName)
             if not os.path.isfile(filePath):
                 fp = open(filePath, 'wb')
                 fp.write(part.get_payload(decode = True))
