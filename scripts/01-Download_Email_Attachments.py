@@ -4,7 +4,6 @@ import os
 import email
 
 
-
 #%% Create email credentials
 email_user = 'shopping.analysis@gmail.com'
 
