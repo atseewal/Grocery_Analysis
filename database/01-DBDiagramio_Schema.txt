@@ -1,0 +1,51 @@
+//// Grocery Analysis Database
+//// https://dbdiagram.io/d/5ee197859ea313663b3a5daa
+
+// Creating Tables
+Table ORDER as O {
+  ORDER_ID int
+  ORDER_DATE date
+  ITEM_ID int
+  ITEM_QUANTITY int
+  ITEM_TOTAL double
+  ITEM_PRICE double
+  SALE_FLG varchar
+  SALE_DISCOUNT double
+  STORE_ID int
+  CUST_ID int
+}
+
+Table STORE {
+  STORE_ID int
+  STORE_NUM int
+  STORE_NM varchar
+}
+
+Table STORE_GEO {
+  STORE_ID int
+  AISLE_NUM int
+  SECTION_NM varchar
+  AISLE_GEO_X int
+  AISLE_GEO_Y int
+}
+
+Table ITEM {
+  ITEM_ID int
+  ITEM_NM varchar
+  ITEM_NM_LONG varchar
+  AISLE_NUM int
+  STORE_ID int
+}
+
+Table CUSTOMER {
+  CUST_ID int
+  CUST_NM varchar
+}
+
+
+// Creating Links
+Ref: "ORDER"."ITEM_ID" - "ITEM"."ITEM_ID"
+Ref: "ORDER"."STORE_ID" - "STORE"."STORE_ID"
+Ref: "STORE"."STORE_ID" < "STORE_GEO"."STORE_ID"
+Ref: "ITEM"."AISLE_NUM" - "STORE_GEO"."AISLE_NUM"
+Ref: "ORDER"."CUST_ID" - "CUSTOMER"."CUST_ID"
